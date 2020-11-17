@@ -1,25 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Nav from './components/Nav';
+import SideBar from './components/SideBar';
+import Container from './components/Container';
+
 import './App.css';
 
 class App extends Component {
+  state = {
+    leagueInfo: [
+      {
+        leagueId: 222468, teamId: 6, seasonId: 2018
+      }
+    ],
+    showSideBar: false,
+  };
+
+  componentDidMount() {
+  }
+
+  closeMenus() {
+    this.setState({
+      showSideBar: false
+    });
+  }
+
+  openSideBar() {
+    this.setState({
+      showSideBar: true
+    });
+  }
+
   render() {
+    const {leagueInfo} = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Nav openSideBar={this.openSideBar.bind(this)}/>
+        <SideBar close={this.closeMenus.bind(this)} open={this.state.showSideBar} />
+        <Container leagueInfo={leagueInfo[0]} />
       </div>
     );
   }

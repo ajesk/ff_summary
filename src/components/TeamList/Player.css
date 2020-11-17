@@ -1,0 +1,43 @@
+.player-entry {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+
+  flex: 1 0 auto;
+}
+
+.MuiAvatar-root-161.MuiAvatar-colorDefault-162.pos-icon-WR {
+  margin: 10;
+  color: '#fff';
+  background: blue;
+}
+
+.MuiAvatar-root-161.MuiAvatar-colorDefault-162.pos-icon-RB {
+  margin: 10;
+  color: '#fff';
+  background: green;
+}
+
+.MuiAvatar-root-161.MuiAvatar-colorDefault-162.pos-icon-QB {
+  margin: 10;
+  color: '#fff';
+  background: red;
+}
+
+.MuiAvatar-root-161.MuiAvatar-colorDefault-162.pos-icon-TE {
+  margin: 10;
+  color: '#fff';
+  background: orange;
+}
+
+.MuiAvatar-root-161.MuiAvatar-colorDefault-162.pos-icon-K {
+  margin: 10;
+  color: '#fff';
+  background: purple;
+}
+
+.MuiAvatar-root-161.MuiAvatar-colorDefault-162.pos-icon-DST {
+  margin: 10;
+  color: '#fff';
+  background: pink;
+}
