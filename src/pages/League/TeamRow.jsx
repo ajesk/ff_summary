@@ -3,42 +3,77 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import round from '../../util/round';
 import styles from './League.styles'
 
-const LeagueTable = ({ rank = 0, totalWeeks = 0, row = {}, team = {}, avgWeekly = 0 }) => {
-  const avgPF = round(row.pf / totalWeeks);
-  const avgPA = round(row.pa / totalWeeks);
-  const pfDiff = round((row.pf / totalWeeks) - avgWeekly);
-  const paDiff = round((row.pa / totalWeeks) - avgWeekly);
-  const good = (diff) => {
-    if (diff > 5) return (diff > 10) ? "Very Good" : "Good";
-
-    if (diff < -5) return (diff < -10) ? "Very Suck" : "Suck";
-
-    return "Average";
+const performanceRating = (diff) => {
+  switch(diff) {
+    case 0:
+      return 'Average';
+    case 1:
+      return 'Good';
+    case 2:
+      return 'Very Good';
+    case 3:
+      return 'Unbelievably Good';
+    case -1:
+      return 'Suck';
+    case -2:
+      return 'Very Suck';
+    case -3:
+      return 'Ungodly Suck';
+    default:
+      return 'Off the charts!!';
   }
-  const luck = (diff) => {
-    if (diff > 5) return (diff > 10) ? "Very Bad Luck" : "Bad Luck";
+}
 
-    if (diff < -5) return (diff < -10) ? "Very Lucky" : "Lucky";
-
-    return "Average";
+const luckRating = (diff) => {
+  switch(diff) {
+    case 0:
+      return 'Average';
+    case -1:
+      return 'Lucky';
+    case -2:
+      return 'Very Lucky';
+    case -3:
+      return 'Unbelievably Lucky';
+    case 1:
+      return 'Unlucky';
+    case 2:
+      return 'Very Unlucky';
+    case 3:
+      return 'Ungodly Unlucky';
+    default:
+      return 'Off the charts!!';
   }
+}
+
+const flatten = (num) => {
+  if (Math.sign(num) === 1) {
+    return Math.floor(num);
+  }
+  return Math.ceil(num);
+}
+
+const LeagueTable = ({ rank = 0, row = {}, team = {}, stdDeviation = 0 }) => {
+  
+  const luck = luckRating(flatten(row.paDeviation / stdDeviation));
+  const performance = performanceRating(flatten(row.pfDeviation / stdDeviation));
+
+  
 
   return (
     <TableRow className={''} key={row.teamId}>
-      <TableCell component="th" scope="row">{rank}</TableCell>
+      <TableCell component='th' scope='row'>{rank}</TableCell>
       <TableCell>{`${row.wins}-${row.losses}-${row.ties}`}</TableCell>
       <TableCell>{team.name}</TableCell>
       <TableCell>{row.pf}</TableCell>
-      <TableCell>{avgPF}</TableCell>
-      <TableCell>{pfDiff}</TableCell>
+      <TableCell>{row.avgPF}</TableCell>
+      <TableCell>{row.pfDeviation}</TableCell>
       <TableCell>{row.pa}</TableCell>
-      <TableCell>{avgPA}</TableCell>
-      <TableCell>{paDiff}</TableCell>
-      <TableCell>{good(pfDiff)}</TableCell>
-      <TableCell>{luck(paDiff)}</TableCell>
+      <TableCell>{row.avgPA}</TableCell>
+      <TableCell>{row.paDeviation}</TableCell>
+      <TableCell>{performance}</TableCell>
+      <TableCell>{luck}</TableCell>
     </TableRow>
   )
 

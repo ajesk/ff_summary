@@ -10,16 +10,30 @@ const League = ({ leagueData = [], teams = [] }) => {
   const avgPoints = round(leagueAvg());
   const totalWeeks = (leagueData[0].wins + leagueData[0].losses + leagueData[0].ties)
   const avgWeekly = round(avgPoints / totalWeeks);
+  const modifiedData = leagueData.map(x => {
+    x.paDeviation = round(x.pa / totalWeeks - avgWeekly);
+    x.pfDeviation = round(x.pf / totalWeeks - avgWeekly);
+    x.avgPF = round(x.pf / totalWeeks)
+    x.avgPA = round(x.pa / totalWeeks)
+
+    return x;
+  })
+  const stdDeviation = round(modifiedData.map(x => Math.abs(x.pfDeviation))
+    .reduce((a, b) => a + b, 0) / leagueData.length);
+
+  console.log(modifiedData)
+  console.log(stdDeviation)
 
   return (
     <div className="league-page">
       <h1>League</h1>
-      <LeagueStats avgPoints={avgPoints} avgWeekly={avgWeekly} />
+      <LeagueStats avgPoints={avgPoints} avgWeekly={avgWeekly} stdDeviation={stdDeviation} />
       <LeagueTable
         leagueData={leagueData}
         totalWeeks={totalWeeks}
         avgWeekly={avgWeekly}
         teams={teams}
+        stdDeviation={stdDeviation}
       />
     </div>
   );

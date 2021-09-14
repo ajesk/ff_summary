@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import styles from './League.styles'
 import TeamRow from './TeamRow';
 
-const LeagueTable = ({ leagueData = [], teams = [], totalWeeks = 0, avgWeekly = 0 }) => {
+const LeagueTable = ({ leagueData = [], teams = [], stdDeviation = 0 }) => {
 
   const findTeam = (id) => teams.find(x => x.id === id);
 
@@ -23,10 +23,10 @@ const LeagueTable = ({ leagueData = [], teams = [], totalWeeks = 0, avgWeekly = 
           <TableCell>Name</TableCell>
           <TableCell>PF</TableCell>
           <TableCell>PF Avg</TableCell>
-          <TableCell>PF Diff</TableCell>
+          <TableCell>PF Dev</TableCell>
           <TableCell>PA</TableCell>
           <TableCell>PA Avg</TableCell>
-          <TableCell>PA Diff</TableCell>
+          <TableCell>PA Dev</TableCell>
           <TableCell>Performance</TableCell>
           <TableCell>Luck</TableCell>
         </TableRow>
@@ -36,7 +36,12 @@ const LeagueTable = ({ leagueData = [], teams = [], totalWeeks = 0, avgWeekly = 
           leagueData.sort((b, a) => a.wins - b.wins || a.ties - b.ties || a.pf - b.pf)
             .map((row, i) =>
               (
-                <TeamRow row={row} rank={i + 1} totalWeeks={totalWeeks} avgWeekly={avgWeekly} team={findTeam(row.ownerId)} />
+                <TeamRow
+                  row={row}
+                  rank={i + 1}
+                  team={findTeam(row.ownerId)}
+                  stdDeviation={stdDeviation}
+                />
               )
             )
         }

@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import styles from './League.styles'
 
-const LeagueTable = ({ avgPoints = 0, avgWeekly = 0 }) => {
+const LeagueTable = ({ avgPoints = 0, avgWeekly = 0, stdDeviation = 0 }) => {
 
   return (
     <Table>
@@ -17,12 +17,14 @@ const LeagueTable = ({ avgPoints = 0, avgWeekly = 0 }) => {
         <TableRow>
           <TableCell>Average Points</TableCell>
           <TableCell>Average Weekly Points</TableCell>
+          <TableCell>Standard Deviation</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         <TableRow>
           <TableCell>{avgPoints}</TableCell>
           <TableCell>{avgWeekly}</TableCell>
+          <TableCell>{stdDeviation}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
