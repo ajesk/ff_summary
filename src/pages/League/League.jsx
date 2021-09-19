@@ -21,9 +21,6 @@ const League = ({ leagueData = [], teams = [] }) => {
   const stdDeviation = round(modifiedData.map(x => Math.abs(x.pfDeviation))
     .reduce((a, b) => a + b, 0) / leagueData.length);
 
-  console.log(modifiedData)
-  console.log(stdDeviation)
-
   return (
     <div className="league-page">
       <h1>League</h1>

@@ -7,7 +7,6 @@ const league = async (leagueId) => {
   const url = `https://api.sleeper.app/v1/league/${leagueId}/rosters`;
 
   return axios.get(url, config).then((res) => {
-    console.log(res)
     return res.data.map((entry) => {
       const { settings, owner_id } = entry;
       return {
