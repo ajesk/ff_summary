@@ -23,7 +23,6 @@ const Container = () => {
     if (id === '') return;
     Promise.all([teamData(id), teamInfo(id), leagueInfo(id)])
       .then(values => {
-        console.log(values)
         setTeamStats(values[0]);
         setTeams(values[1]);
         setLeagueData(values[2])
