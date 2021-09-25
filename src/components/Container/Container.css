@@ -1,0 +1,9 @@
+.league-id-entry {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+svg {
+  padding-right: 1em;
+}

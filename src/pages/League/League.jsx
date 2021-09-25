@@ -5,12 +5,12 @@ import styles from './League.styles'
 import LeagueStats from './LeagueStats';
 import round from '../../util/round';
 
-const League = ({ leagueData = [], teams = [] }) => {
-  const leagueAvg = () => leagueData.map(x => x.pf).reduce((a, b) => a + b, 0) / leagueData.length;
+const League = ({ teamStats = [], teams = [], name = "", season = "" }) => {
+  const leagueAvg = () => teamStats.map(x => x.pf).reduce((a, b) => a + b, 0) / teamStats.length;
   const avgPoints = round(leagueAvg());
-  const totalWeeks = (leagueData[0].wins + leagueData[0].losses + leagueData[0].ties)
+  const totalWeeks = (teamStats[0].wins + teamStats[0].losses + teamStats[0].ties)
   const avgWeekly = round(avgPoints / totalWeeks);
-  const modifiedData = leagueData.map(x => {
+  const modifiedData = teamStats.map(x => {
     x.paDeviation = round(x.pa / totalWeeks - avgWeekly);
     x.pfDeviation = round(x.pf / totalWeeks - avgWeekly);
     x.avgPF = round(x.pf / totalWeeks)
@@ -19,14 +19,14 @@ const League = ({ leagueData = [], teams = [] }) => {
     return x;
   })
   const stdDeviation = round(modifiedData.map(x => Math.abs(x.pfDeviation))
-    .reduce((a, b) => a + b, 0) / leagueData.length);
+    .reduce((a, b) => a + b, 0) / teamStats.length);
 
   return (
     <div className="league-page">
-      <h1>League</h1>
+      <h1>{`${name} ${season}`}</h1>
       <LeagueStats avgPoints={avgPoints} avgWeekly={avgWeekly} stdDeviation={stdDeviation} />
       <LeagueTable
-        leagueData={leagueData}
+        leagueData={teamStats}
         totalWeeks={totalWeeks}
         avgWeekly={avgWeekly}
         teams={teams}

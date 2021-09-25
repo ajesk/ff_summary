@@ -39,6 +39,7 @@ const LeagueTable = ({ leagueData = [], teams = [], stdDeviation = 0 }) => {
                 <TeamRow
                   row={row}
                   rank={i + 1}
+                  key={i}
                   team={findTeam(row.ownerId)}
                   stdDeviation={stdDeviation}
                 />
