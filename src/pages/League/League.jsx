@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { Box, withStyles } from '@material-ui/core';
 import LeagueTable from './LeagueTable';
 import styles from './League.styles'
 import LeagueStats from './LeagueStats';
@@ -25,6 +25,7 @@ const League = ({ teamStats = [], teams = [], name = "", season = "" }) => {
     <div className="league-page">
       <h1>{`${name} ${season}`}</h1>
       <LeagueStats avgPoints={avgPoints} avgWeekly={avgWeekly} stdDeviation={stdDeviation} />
+      <Box sx={{p: 1, bgcolor: 'grey.500'}} />      
       <LeagueTable
         leagueData={teamStats}
         totalWeeks={totalWeeks}

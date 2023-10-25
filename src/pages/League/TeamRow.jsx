@@ -1,9 +1,18 @@
 import React from 'react';
 
-import { withStyles } from '@material-ui/core';
+import { styled, withStyles } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import styles from './League.styles'
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: "white",
+  },
+  '&:nth-of-type(even)': {
+    backgroundColor: "lightgrey",
+  },
+}));
 
 const performanceRating = (diff) => {
   switch(diff) {
@@ -62,7 +71,7 @@ const LeagueTable = ({ rank = 0, row = {}, team = {}, stdDeviation = 0 }) => {
   
 
   return (
-    <TableRow className={''} key={row.teamId}>
+    <StyledTableRow className={''} key={row.teamId}>
       <TableCell component='th' scope='row'>{rank}</TableCell>
       <TableCell>{`${row.wins}-${row.losses}-${row.ties}`}</TableCell>
       <TableCell>{team.name}</TableCell>
@@ -74,7 +83,7 @@ const LeagueTable = ({ rank = 0, row = {}, team = {}, stdDeviation = 0 }) => {
       <TableCell>{row.paDeviation}</TableCell>
       <TableCell>{performance}</TableCell>
       <TableCell>{luck}</TableCell>
-    </TableRow>
+    </StyledTableRow>
   )
 
 }
